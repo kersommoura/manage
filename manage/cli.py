@@ -13,7 +13,11 @@ import yaml
 
 from manage import __version__
 from manage.auto_import import exec_init, exec_init_script, import_objects
-from manage.commands_collector import load_command_sources, load_commands, load_groups
+from manage.commands_collector import (
+    load_command_sources,
+    load_commands,
+    load_groups,
+)
 from manage.template import default_manage_dict
 
 MANAGE_FILE = "manage.yml"
@@ -40,7 +44,9 @@ def load_manage_dict(filename=None):
             )
             MANAGE_DICT["shell"]["auto_import"]["display"] = False
         if manage_filename:
-            loader = yaml.FullLoader if hasattr(yaml, 'FullLoader') else yaml.Loader
+            loader = (
+                yaml.FullLoader if hasattr(yaml, "FullLoader") else yaml.Loader
+            )
             with open(manage_filename) as manage_file:
                 MANAGE_DICT.update(yaml.load(manage_file, Loader=loader))
     return MANAGE_DICT
@@ -117,7 +123,9 @@ def create_shell(console, manage_dict=None, extra_vars=None, exit_hooks=None):
     _vars.update(auto_imported)
     msgs = []
     if manage_dict["shell"]["banner"]["enabled"]:
-        msgs.append(manage_dict["shell"]["banner"]["message"].format(**manage_dict))
+        msgs.append(
+            manage_dict["shell"]["banner"]["message"].format(**manage_dict)
+        )
     if auto_imported and manage_dict["shell"]["auto_import"]["display"]:
         auto_imported_names = [
             key
@@ -166,11 +174,15 @@ def create_shell(console, manage_dict=None, extra_vars=None, exit_hooks=None):
             c.TerminalInteractiveShell.banner2 = banner_msg
             c.InteractiveShellApp.extensions = [
                 extension
-                for extension in manage_dict["shell"].get("ipython_extensions", [])
+                for extension in manage_dict["shell"].get(
+                    "ipython_extensions", []
+                )
             ]
             c.InteractiveShellApp.exec_lines = [
                 exec_line
-                for exec_line in manage_dict["shell"].get("ipython_exec_lines", [])
+                for exec_line in manage_dict["shell"].get(
+                    "ipython_exec_lines", []
+                )
             ]
             if manage_dict["shell"].get("ipython_auto_reload", True) is True:
                 c.InteractiveShellApp.extensions.append("autoreload")
@@ -198,13 +210,22 @@ def create_shell(console, manage_dict=None, extra_vars=None, exit_hooks=None):
     help="Start with ipython console",
 )
 @click.option(
-    "console", "--ptpython", flag_value="ptpython", help="Start with ptpython console"
+    "console",
+    "--ptpython",
+    flag_value="ptpython",
+    help="Start with ptpython console",
 )
 @click.option(
-    "console", "--bpython", flag_value="bpython", help="Start with bpython console"
+    "console",
+    "--bpython",
+    flag_value="bpython",
+    help="Start with bpython console",
 )
 @click.option(
-    "console", "--python", flag_value="python", help="Start with python console"
+    "console",
+    "--python",
+    flag_value="python",
+    help="Start with python console",
 )
 def shell(console):
     """Runs a Python shell with context"""
@@ -233,9 +254,9 @@ def init_cli(cli_obj, reset=False):
         MANAGE_DICT = {}
     sys.path.insert(0, ".")
     load_manage_dict_from_sys_args()
-    cli.help = MANAGE_DICT.get("help_text", "{project_name} Interactive shell!").format(
-        **MANAGE_DICT
-    )
+    cli.help = MANAGE_DICT.get(
+        "help_text", "{project_name} Interactive shell!"
+    ).format(**MANAGE_DICT)
     load_groups(cli, MANAGE_DICT)
     load_commands(cli, MANAGE_DICT)
     manager = click.CommandCollection(help=cli.help, no_args_is_help=False)

@@ -56,7 +56,9 @@ def handle_options_and_args(_command, arguments, options):
     return _command
 
 
-def make_command_from_function(function, options, help_text=None, arguments=None):
+def make_command_from_function(
+    function, options, help_text=None, arguments=None
+):
 
     if help_text:
         function.__doc__ = help_text
@@ -129,7 +131,9 @@ def load_commands(cli, manage_dict):
         help_text = command_dict.get("help_text")
         options = command_dict.get("options", {})
         arguments = command_dict.get("arguments", {})
-        module_path, function_name = parse_function_path(command_dict["function"])
+        module_path, function_name = parse_function_path(
+            command_dict["function"]
+        )
         function = getattr(import_module(module_path), function_name)
         group = cli.manage_groups.get(command_dict.get("group"), cli)
         group.add_command(
@@ -159,7 +163,10 @@ def load_command_sources(manager, manage_dict):
         if isinstance(source_data, dict):
             source = import_module(source_data["name"])
             manager.add_source(
-                source(*source_data.get("args", []), **source_data.get("kwargs", {}))
+                source(
+                    *source_data.get("args", []),
+                    **source_data.get("kwargs", {})
+                )
                 if callable(source)
                 else source
             )
@@ -180,8 +187,8 @@ def load_groups(cli, manage_dict):
                 data = data or {}
                 if "help_text" in data:
                     data["help"] = data.pop("help_text")
-                cli.manage_groups[group_name] = cli.group(name=group_name, **data)(
-                    lambda: None
-                )
+                cli.manage_groups[group_name] = cli.group(
+                    name=group_name, **data
+                )(lambda: None)
         else:
             cli.manage_groups[group] = cli.group(name=group)(lambda: None)

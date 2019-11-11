@@ -8,16 +8,19 @@ Command Line Manager + Interactive Shell for Python Projects
 .. image:: https://img.shields.io/pypi/v/manage.svg
         :target: https://pypi.python.org/pypi/manage
 
-.. image:: https://img.shields.io/travis/rochacbruno/manage.svg
-        :target: https://travis-ci.org/rochacbruno/manage
+.. image:: https://img.shields.io/travis/python-manage/manage.svg
+        :target: https://travis-ci.org/python-manage/manage
 
 .. image:: https://readthedocs.org/projects/manage/badge/?version=latest
         :target: https://manage.readthedocs.io/en/latest/?badge=latest
         :alt: Documentation Status
 
-.. image:: https://pyup.io/repos/github/rochacbruno/manage/shield.svg
-     :target: https://pyup.io/repos/github/rochacbruno/manage/
+.. image:: https://pyup.io/repos/github/python-manage/manage/shield.svg
+     :target: https://pyup.io/repos/github/python-manage/manage/
      :alt: Updates
+
+.. image:: https://img.shields.io/badge/code%20style-black-000000.svg
+    :target: https://github.com/ambv/black
 
 
 * Free software: ISC license
@@ -30,7 +33,8 @@ Features
 With **manage** you add a **command line manager** to your Python project and
 also it comes with an interactive shell with iPython support.
 
-All you have to do is **init** your project directory (creating the manage.yml file)
+All you have to do is **init** your project directory (creating the
+manage.yml file)
 
 .. code-block:: console
 
@@ -39,7 +43,8 @@ All you have to do is **init** your project directory (creating the manage.yml f
     $ manage init
     creating manage.yml....
 
-The file **manage.yml** describes how **manage** command should discover your app modules and custom commands and also it
+The file **manage.yml** describes how **manage** command should discover your
+app modules and custom commands and also it
 defines which objects should be loaded in to the **shell**
 
 .. note::
@@ -51,14 +56,16 @@ defines which objects should be loaded in to the **shell**
 The Shell
 =========
 
-By default the command :code:`manage shell` is included, it is a simple Python REPL console with some
-configurable options.
+By default the command :code:`manage shell` is included, it is a simple
+Python REPL console with some configurable options.
 
-You can change the banner message to say anything you want, **e.g: "Welcome to my shell!"** and you can also
-specify some objects to be automatically imported in to the shell context so when you enter in to the shell you
+You can change the banner message to say anything you want, **e.g: "Welcome
+to my shell!"** and you can also specify some objects to be automatically
+imported in to the shell context so when you enter in to the shell you
 already have your project's common objects available.
 
-Also you can specify a custom function to run or a string based code block to run, useful to init and configure the objects.
+Also you can specify a custom function to run or a string based code block to
+run, useful to init and configure the objects.
 
 Consoles
 
@@ -67,10 +74,14 @@ Consoles
 - :code:`manage shell --ipython`  - This is the default (if ipython installed)
 - :code:`manage shell --ptpython`
 - :code:`manage shell --bpython`
-- :code:`manage shell --python` - This is the **default Python console** including support for autocomplete. (will be default when no other is installed)
+- :code:`manage shell --python` - This is the **default Python console**
+  including support for autocomplete. (will be default when no other is
+  installed)
 
-The first thing you can do with **manage** is customizing the objects that will be automatically loaded in to shell,
-saving you from importing and initializing a lot of stuff every time you need to play with your app via console.
+The first thing you can do with **manage** is customizing the objects that
+will be automatically loaded in to shell saving you from importing and
+initializing a lot of stuff every time you need to play with your app via
+console.
 
 Edit **manage.yml** with:
 
@@ -125,11 +136,11 @@ Watch the demo:
 
 Check more examples in:
 
-https://github.com/rochacbruno/manage/tree/master/examples/
+https://github.com/python-manage/manage/tree/master/examples/
 
 The famous **naval fate** example (used in docopt and click) is in:
 
-https://github.com/rochacbruno/manage/tree/master/examples/naval/
+https://github.com/python-manage/manage/tree/master/examples/naval/
 
 
 Projects using manage
@@ -150,12 +161,14 @@ e.g: A command to add users to your system::
 **manage** has some different ways for you to define custom commands,
 you can use **click commands** defined in your project modules,
 you can also use **function_commands** defined anywhere in your project,
-and if really needed can define **inline_commands** inside the **manage.yml** file
+and if really needed can define **inline_commands** inside the **manage.yml**
+file
 
 1. Using a custom click_commands module (single file)
 -----------------------------------------------------
 
-Lets say you have a commands module in your application, you write your custom command there and **manage** will load it
+Lets say you have a commands module in your application, you write your
+custom command there and **manage** will load it
 
 .. code-block:: python
 
@@ -170,7 +183,8 @@ Lets say you have a commands module in your application, you write your custom c
       mysystem.User.create(name, password)
 
 
-Now you go to your **manage.yml** or **.manage.yml** and specify your custom command module.
+Now you go to your **manage.yml** or **.manage.yml** and specify your custom
+command module.
 
 .. code-block:: yaml
 
@@ -193,8 +207,8 @@ Now you run **manage --help**
 Using a click_commands package (multiple files)
 -----------------------------------------------
 
-It is common to have different files to hold your commands so you may prefer having
-a **commands/** package and some **python** modules inside it to hold commands.
+It is common to have different files to hold your commands so you may prefer
+having a **commands/** package and some **python** modules inside it to hold commands.
 
 .. code-block:: python
 
@@ -218,7 +232,8 @@ a **commands/** package and some **python** modules inside it to hold commands.
       click.echo('The cache will be erased...')
       mysystem.cache.clear()
 
-So now you want to add all those commands to your **manage** editing your manage file with.
+So now you want to add all those commands to your **manage** editing your
+manage file with.
 
 .. code-block:: yaml
 
@@ -261,8 +276,8 @@ customize it.
 Having different namespaces
 ---------------------------
 
-If customizing the name looks too much work for you, and you are only trying to handle naming conflicts
-you can user namespaced commands.
+If customizing the name looks too much work for you, and you are only trying
+to handle naming conflicts you can user namespaced commands.
 
 .. code-block:: yaml
 
@@ -270,7 +285,8 @@ you can user namespaced commands.
   click_commands:
     - module: commands
 
-Now you run **manage --help** and you can see all the commands in the same module will be namespaced by **modulename_**
+Now you run **manage --help** and you can see all the commands in the same
+module will be namespaced by **modulename_**
 
 .. code-block:: console
 
@@ -297,7 +313,8 @@ And you can even customize namespace for each module separately
     - module: commands.user
       namespace: user
 
-Now you run **manage --help** and you can see all the commands in the same module will be namespaced.
+Now you run **manage --help** and you can see all the commands in the same
+module will be namespaced.
 
 .. code-block:: console
 
@@ -314,8 +331,8 @@ Now you run **manage --help** and you can see all the commands in the same modul
 2. Defining your inline commands in manage file directly
 --------------------------------------------------------
 
-Sometimes your command is so simple that you do not want (or can't) have a custom module,
-so you can put all your commands in yaml file directly.
+Sometimes your command is so simple that you do not want (or can't) have a
+custom module, so you can put all your commands in yaml file directly.
 
 .. code-block:: yaml
 
@@ -395,7 +412,9 @@ Now running **manage --help**
 Further Explanations
 ====================
 
-- You can say, **how this is useful?**, There's no need to get a separate package and configure everything in yaml, just use iPython to do it. Besides, IPython configuration has a lot more options and capabilities.
+- You can say, **how this is useful?**, There's no need to get a separate
+  package and configure everything in yaml, just use iPython to do it. Besides,
+  IPython configuration has a lot more options and capabilities.
 - So I say: Nice! **If you don't like it, dont't use it!**
 
 Credits
@@ -403,7 +422,8 @@ Credits
 
 - This is inspired by **Django's manage.py command**
 - This is based on click_
-- This package was created with Cookiecutter_ and the `audreyr/cookiecutter-pypackage`_ project template.
+- This package was created with Cookiecutter_ and the
+  `audreyr/cookiecutter-pypackage`_ project template.
 
 .. _click: http://click.pocoo.org
 .. _Cookiecutter: https://github.com/audreyr/cookiecutter
