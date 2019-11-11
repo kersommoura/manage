@@ -1,3 +1,30 @@
+Metadata-Version: 2.1
+Name: manage
+Version: 0.1.13
+Summary: Command Line Manager + Interactive Shell for Python Projects
+Home-page: https://github.com/python-manage/manage
+Author: Bruno Rocha
+Author-email: rochacbruno@gmail.com
+License: ISC license
+Keywords: manage
+Platform: UNKNOWN
+Classifier: Development Status :: 2 - Pre-Alpha
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: ISC License (ISCL)
+Classifier: Natural Language :: English
+Classifier: Programming Language :: Python :: 3.5
+Classifier: Programming Language :: Python :: 3.6
+Classifier: Programming Language :: Python :: 3.7
+Requires-Dist: Click (>=7.0)
+Requires-Dist: PyYAML (>=3.11)
+Provides-Extra: dev
+Requires-Dist: coveralls ; extra == 'dev'
+Requires-Dist: pre-commit ; extra == 'dev'
+Requires-Dist: sphinx ; extra == 'dev'
+Requires-Dist: wheel ; extra == 'dev'
+Requires-Dist: twine ; extra == 'dev'
+Requires-Dist: tox ; extra == 'dev'
+
 ======
 Manage
 ======
@@ -15,6 +42,10 @@ Command Line Manager + Interactive Shell for Python Projects
         :target: https://manage.readthedocs.io/en/latest/?badge=latest
         :alt: Documentation Status
 
+.. image:: https://pyup.io/repos/github/python-manage/manage/shield.svg
+     :target: https://pyup.io/repos/github/python-manage/manage/
+     :alt: Updates
+
 .. image:: https://img.shields.io/badge/code%20style-black-000000.svg
     :target: https://github.com/ambv/black
 
@@ -26,11 +57,11 @@ Command Line Manager + Interactive Shell for Python Projects
 Features
 ========
 
-With **manage** you easily add a **command line manager** to your Python
-project and also it comes with an interactive shell with iPython support.
+With **manage** you add a **command line manager** to your Python project and
+also it comes with an interactive shell with iPython support.
 
-All you have to do is **manage init** your project directory (creating the
-manage.yml file).
+All you have to do is **init** your project directory (creating the
+manage.yml file)
 
 .. code-block:: console
 
@@ -375,6 +406,7 @@ And if you already has some defined function (any callable works).
         print("Creating user %s" % name)
 
 
+
 .. code-block:: yaml
 
     function_commands:
@@ -403,6 +435,15 @@ Now running **manage --help**
   $ manage new_user --name=Bruno --password=1234
   Creating user Bruno
 
+
+Further Explanations
+====================
+
+- You can say, **how this is useful?**, There's no need to get a separate
+  package and configure everything in yaml, just use iPython to do it. Besides,
+  IPython configuration has a lot more options and capabilities.
+- So I say: Nice! **If you don't like it, dont't use it!**
+
 Credits
 =======
 
@@ -419,3 +460,64 @@ Similar projects
 ================
 
 - Cobra is a `manage` for Go language https://github.com/spf13/cobra
+
+
+=======
+History
+=======
+
+0.1.12 (2016-08-15)
+-------------------
+* Readline is optional because of MacOS compat
+
+0.1.11 (2016-08-15)
+-------------------
+* Submodules import
+* multiple 'as' names
+
+0.1.10 (2016-07-04)
+-------------------
+* Bpython added
+
+0.1.9 (2016-07-03)
+------------------
+* Bpython added
+
+0.1.8 (2016-07-03)
+------------------
+* Python 3 dict fixes
+
+0.1.7 (2016-06-26)
+------------------
+* exec bug fix for py3
+
+0.1.6 (2016-06-26)
+------------------
+* exec bug fix
+
+0.1.5 (2016-06-25)
+------------------
+* added support to commands collector (see quokka cms)
+
+0.1.4 (2016-06-22)
+------------------
+* Fix missing deps
+
+0.1.3 (2016-06-19)
+------------------
+* Support to function_commands
+
+0.1.2 (2016-06-17)
+------------------
+* Support to inline_commands
+
+0.1.1 (2016-06-14)
+------------------
+* Support to custom and hidden manage_file
+
+0.1.0 (2016-06-09)
+------------------
+
+* First release on PyPI.
+
+

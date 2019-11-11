@@ -40,7 +40,7 @@ def load_manage_dict(filename=None):
             )
             MANAGE_DICT["shell"]["auto_import"]["display"] = False
         if manage_filename:
-            loader = yaml.FullLoader if hasattr(yaml, 'FullLoader') else yaml.Loader
+            loader = yaml.FullLoader if hasattr(yaml, "FullLoader") else yaml.Loader
             with open(manage_filename) as manage_file:
                 MANAGE_DICT.update(yaml.load(manage_file, Loader=loader))
     return MANAGE_DICT
@@ -90,9 +90,7 @@ def init(banner, project_name, hidden, backup):
             data["shell"]["banner"]["message"] = banner
         if project_name:
             data["project_name"] = project_name
-            data["help_text"] = "This is the {} inteactive shell".format(
-                project_name
-            )
+            data["help_text"] = "This is the {} inteactive shell".format(project_name)
         output.write(yaml.dump(data, default_flow_style=False))
 
 
